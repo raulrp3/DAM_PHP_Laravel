@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function() {
+    return 'Home';
+});
+
+Route::get('/users', function() {
+    return 'Usuarios';
+});
+
+Route::get('/users/{id}', function($id) {
+    return "Usuario: {$id}";
+})->where('id', '[0-9]+');
+
+Route::get('/users/new', function() {
+    return 'New user';
 });
