@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class WellcomeUserController extends Controller
 {
-    public function inicio(){
+    public function index(){
         return 'Home';
     }
 }

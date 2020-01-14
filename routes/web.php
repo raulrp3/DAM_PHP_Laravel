@@ -13,10 +13,13 @@
 
 Route::get('/', 'WellcomeUserController@index');
 
-Route::get('/users', 'UserController@index');
+Route::prefix('/users')->group(function() {
 
-Route::get('/users/{id}', 'UserController@show')->where('id', '[0-9]+');
+    Route::get('/', 'UserController@index');
 
-Route::get('/users/new', 'UserController@create');
+    Route::get('/{id}', 'UserController@show')->where('id', '[0-9]+');
 
-Route::get('/users/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
+    Route::get('/new', 'UserController@create');
+
+    Route::get('/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
+});
