@@ -11,22 +11,12 @@
 |
 */
 
-Route::get('/', function() {
-    return 'Home';
-});
+Route::get('/', 'WellcomeUserController@index');
 
-Route::get('/users', function() {
-    return 'Usuarios';
-});
+Route::get('/users', 'UserController@index');
 
-Route::get('/users/{id}', function($id) {
-    return "Usuario: {$id}";
-})->where('id', '[0-9]+');
+Route::get('/users/{id}', 'UserController@show')->where('id', '[0-9]+');
 
-Route::get('/users/new', function() {
-    return 'Nuevo usuario';
-});
+Route::get('/users/new', 'UserController@create');
 
-Route::get('/users/{id}/edit', function($id) {
-    return "Editando al usuario: {$id}";
-})->where('id', '[0-9]+');
+Route::get('/users/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
