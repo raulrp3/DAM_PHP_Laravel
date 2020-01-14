@@ -7,28 +7,33 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        $users = [
-            'Raúl',
-            'Francisco',
-            'Juan'
-        ];
 
-        return view('users', [
+        if (request()->has('empty')){
+            $users = [];
+        }else{
+            $users = ['Raúl', 'Francisco', 'Juan'];
+        }
+
+        return view('users/index', [
             'users' => $users,
             'title' => 'Listado de usuarios'
         ]);
     }
 
     public function show($id){
-        return "Usuario: {$id}";
+        return view('users/show', [
+            'id' => $id
+        ]);
     }
 
     public function create(){
-        return 'Nuevo usuario';
+        return view('users/create');
     }
 
     public function edit($id){
-        return "Editando al usuario: {$id}";
+        return view('users/edit', [
+            'id' => $id
+        ]);
     }
 }
  
