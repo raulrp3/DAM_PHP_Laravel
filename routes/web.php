@@ -15,11 +15,11 @@ Route::get('/', 'WellcomeUserController@index');
 
 Route::prefix('/users')->group(function() {
 
-    Route::get('/', 'UserController@index');
+    Route::get('/', 'UserController@index')->name('users');
 
-    Route::get('/{id}', 'UserController@show')->where('id', '[0-9]+');
+    Route::get('/{id}', 'UserController@show')->where('id', '[0-9]+')->name('users.show');
 
-    Route::get('/new', 'UserController@create');
+    Route::get('/new', 'UserController@create')->name('users.create');
 
-    Route::get('/{id}/edit', 'UserController@edit')->where('id', '[0-9]+');
+    Route::get('/{id}/edit', 'UserController@edit')->where('id', '[0-9]+')->name('users.edit');
 });

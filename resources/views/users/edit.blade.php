@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edición de usuarios</title>
-</head>
-<body>
-    <p>Editando al usuario: {{ $id }}</p>
-</body>
-</html>
+@extends('layout')
+
+@section('content')
+
+    <div class="container mt-5">
+        <h1>Editando al usuario: {{ $id }}</h1>
+        <div class="alert alert-secondary mt-5">
+            <a href="{{ route('users') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Volver</a>
+        </div>
+    </div>
+
+@endsection
