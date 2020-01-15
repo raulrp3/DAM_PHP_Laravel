@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'WellcomeUserController@index');
+Route::get('/', 'WellcomeUserController@index')->name('wellcome');
 
 Route::prefix('/users')->group(function() {
 
