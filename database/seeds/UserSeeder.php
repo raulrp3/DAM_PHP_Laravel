@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Profession;
 
 class UserSeeder extends Seeder
 {
@@ -12,18 +14,18 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $profession_id = DB::table('professions')->where('title', 'Desarrollador front-end')->value('id');
+        $profession_id = Profession::where('title', 'Desarrollador front-end')->value('id');
 
-        DB::table('users')->insert([
+        User::create([
             'name' => 'Raúl Ramírez',
             'email' => 'raul.ramirez@escuelaestech.es',
             'password' => bcrypt('estech'),
             'profession_id' => $profession_id
         ]);
 
-        $profession_id = DB::table('professions')->where('title', 'Desarrollador back-end')->value('id');
+        $profession_id = Profession::where('title', 'Desarrollador back-end')->value('id');
 
-        DB::table('users')->insert([
+        User::create([
             'name' => 'Francisco Jesús Adán',
             'email' => 'francisco.adan@escuelaestech.es',
             'password' => bcrypt('estech'),
