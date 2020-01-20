@@ -20,7 +20,8 @@ class UserSeeder extends Seeder
             'name' => 'Raúl Ramírez',
             'email' => 'raul.ramirez@escuelaestech.es',
             'password' => bcrypt('estech'),
-            'profession_id' => $profession_id
+            'profession_id' => $profession_id,
+            'is_admin' => true
         ]);
 
         $profession_id = Profession::where('title', 'Desarrollador back-end')->value('id');
@@ -29,7 +30,8 @@ class UserSeeder extends Seeder
             'name' => 'Francisco Jesús Adán',
             'email' => 'francisco.adan@escuelaestech.es',
             'password' => bcrypt('estech'),
-            'profession_id' => $profession_id
+            'profession_id' => $profession_id,
+            'is_admin' => false
         ]);
     }
 }

@@ -29,7 +29,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'is_admin' => 'boolean',
+    ];
+
     public function isAdmin(){
-        return $this->email === 'raul.ramirez@escuelaestech.es';
+        return $this->is_admin;
     }
 }
