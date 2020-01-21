@@ -17,7 +17,7 @@ Route::prefix('/users')->group(function() {
 
     Route::get('/', 'UserController@index')->name('users');
 
-    Route::get('/{id}', 'UserController@show')->where('id', '[0-9]+')->name('users.show');
+    Route::get('/{user}', 'UserController@show')->where('user', '[0-9]+')->name('users.show');
 
     Route::get('/new', 'UserController@create')->name('users.create');
 

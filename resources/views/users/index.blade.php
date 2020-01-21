@@ -12,7 +12,7 @@
                 <li class="list-group-item">
                     <p>{{ $user->name }}, ({{ $user->email }})</p>
                     <div class="mt-2">
-                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-info">Ver detalles</a>
+                        <a href="{{ route('users.show', $user) }}" class="btn btn-info">Ver detalles</a>
                         <a href="{{ route('users.edit', 5) }}" class="btn btn-dark">Modificar</a>
                     </div>
                 </li>
