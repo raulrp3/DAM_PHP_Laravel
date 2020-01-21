@@ -32,5 +32,17 @@ class UserController extends Controller
             'id' => $id
         ]);
     }
+
+    public function store(){
+        $data = request()->all();
+
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password'])
+        ]);
+
+        return redirect()->route('users');
+    }
 }
  
