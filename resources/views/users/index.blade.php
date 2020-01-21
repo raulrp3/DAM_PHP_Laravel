@@ -10,10 +10,9 @@
         <ul class="list-group mt-4 mb-4">
             @forelse($users as $user)
                 <li class="list-group-item">
-                    <p>{{ $user->name }}</p>
-                    <p>{{ $user->email }}</p>
+                    <p>{{ $user->name }}, ({{ $user->email }})</p>
                     <div class="mt-2">
-                        <a href="{{ route('users.show', 5) }}" class="btn btn-info">Mostrar</a>
+                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-info">Ver detalles</a>
                         <a href="{{ route('users.edit', 5) }}" class="btn btn-dark">Modificar</a>
                     </div>
                 </li>
