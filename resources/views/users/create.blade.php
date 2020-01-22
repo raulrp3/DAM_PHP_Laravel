@@ -28,7 +28,7 @@
                 @endif 
             </div>
             <div class="form-group">
-                <p>¿Es un usuario administrado?</p>
+                <p>¿Es un usuario administrador?</p>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" id="radioNo" value="false" checked>
                     <label class="form-check-label" for="radioNo">No.</label>
