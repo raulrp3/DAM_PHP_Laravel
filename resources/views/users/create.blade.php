@@ -27,6 +27,20 @@
                     <div class="alert alert-danger mt-2">{{ $errors->first('password') }}</div>
                 @endif 
             </div>
+            <div class="form-group">
+                <p>¿Es un usuario administrado?</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" id="radioNo" value="false" checked>
+                    <label class="form-check-label" for="radioNo">No.</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" id="radioYes" value="true">
+                    <label class="form-check-label" for="radioYes">Sí.</label>
+                </div>
+                @if($errors->has('type'))
+                    <div class="alert alert-danger mt-2">{{ $errors->first('type') }}</div>
+                @endif
+            </div>
             <input type="submit" class="btn btn-success mt-3" value="Crear usuario">
         </form>
         <div class="alert alert-secondary mt-5">

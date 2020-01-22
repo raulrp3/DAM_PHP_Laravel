@@ -37,7 +37,8 @@ class UserController extends Controller
         $data = request()->validate([
             'name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:6']
+            'password' => ['required', 'min:6'],
+            'type' => 'required'
         ], [
             'name.required' => 'El campo nombre es obligatorio.',
             'name.regex' => 'El campo nombre no es válido.',
@@ -46,14 +47,15 @@ class UserController extends Controller
             'email.unique' => 'El campo correo electrónico ya pertenece a otro usuario.',
             'email.email' => 'El campo correo electrónico no es válido.',
             'password.required' => 'El campo contraseña es obligatorio.',
-            'password.min' => 'El campo contraseña debe tener más de 6 caracteres.'
+            'password.min' => 'El campo contraseña debe tener más de 6 caracteres.',
+            'type.required' => 'Debe indicar si el usuario es un usuario de tipo administrador.'
         ]);
-
 
         User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password'])
+            'password' => bcrypt($data['password']),
+            'is_admin' => $data['type'] == 'false'? false: true
         ]);
 
         return redirect()->route('users');
