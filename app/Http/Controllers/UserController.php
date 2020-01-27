@@ -85,7 +85,8 @@ class UserController extends Controller
             'name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
             'email.required' => 'El campo correo electrónico es obligatorio.',
             'email.unique' => 'El campo correo electrónico ya pertenece a otro usuario.',
-            'email.email' => 'El campo correo electrónico no es válido.'
+            'email.email' => 'El campo correo electrónico no es válido.',
+            'password.min' => 'El campo contraseña debe tener más de 6 caracteres.'
         ]);
 
         if($data['password'] != null){

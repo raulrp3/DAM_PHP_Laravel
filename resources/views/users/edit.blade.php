@@ -25,6 +25,9 @@
             <div class="form-group">
                 <label for="inputPass">Contraseña:</label>
                 <input type="password" class="form-control" id="inputPass" name="password">
+                @if($errors->has('password'))
+                    <div class="alert alert-danger mt-2">{{ $errors->first('password') }}</div>
+                @endif 
             </div>
             <div class="form-group">
                 <p>¿Es un usuario administrador?</p>
