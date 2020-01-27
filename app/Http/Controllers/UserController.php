@@ -76,7 +76,7 @@ class UserController extends Controller
         $data = request()->validate([
             'name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-            'password' => '',
+            'password' => ['nullable', 'min:6'],
             'type' => '',
             'profession' => ''
         ], [
