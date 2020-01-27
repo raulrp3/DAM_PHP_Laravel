@@ -14,6 +14,12 @@
                     <div class="mt-2">
                         <a href="{{ route('users.show', $user) }}" class="btn btn-info">Ver detalles</a>
                         <a href="{{ route('users.edit', $user) }}" class="btn btn-dark">Modificar</a>
+                        <form action="{{ route('users.destroy', $user) }}" method="post" class="mt-2">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                        </form>
                     </div>
                 </li>
             @empty

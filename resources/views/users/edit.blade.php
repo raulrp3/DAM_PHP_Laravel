@@ -4,7 +4,7 @@
 
     <div class="container mt-5">
         <h1 class="mb-3">Usuario #{{ $user->id }}.</h1>
-        <form action="{{ route('users.edit', ['user' => $user ]) }}" method="post">
+        <form action="{{ route('users.edit', $user) }}" method="post">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
 
