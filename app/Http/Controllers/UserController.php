@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Profession;
 
 class UserController extends Controller
 {
@@ -24,7 +25,11 @@ class UserController extends Controller
     }
 
     public function create(){
-        return view('users/create');
+        $professions = Profession::all();
+
+        return view('users/create', [
+            'professions' => $professions
+        ]);
     }
 
     public function edit($id){
@@ -38,7 +43,8 @@ class UserController extends Controller
             'name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6'],
-            'type' => 'required'
+            'type' => 'required',
+            'profession' => ''
         ], [
             'name.required' => 'El campo nombre es obligatorio.',
             'name.regex' => 'El campo nombre no es válido.',
@@ -55,7 +61,8 @@ class UserController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'is_admin' => $data['type'] == 'false'? false: true
+            'is_admin' => $data['type'] == 'false'? false: true,
+            'profession_id' => intval($data['profession'])
         ]);
 
         return redirect()->route('users');

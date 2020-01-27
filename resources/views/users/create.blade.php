@@ -41,6 +41,14 @@
                     <div class="alert alert-danger mt-2">{{ $errors->first('type') }}</div>
                 @endif
             </div>
+            <div class="form-group">
+                <label for="professions">Profesión:</label>
+                <select name="profession" id="professions" class="form-control">
+                    @foreach($professions as $profession)
+                        <option value="{{ $profession->id }}">{{ $profession->title }}</option>
+                    @endforeach
+                </select>
+            </div>
             <input type="submit" class="btn btn-success mt-3" value="Crear usuario">
         </form>
         <div class="alert alert-secondary mt-5">
