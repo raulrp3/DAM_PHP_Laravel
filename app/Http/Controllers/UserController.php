@@ -66,7 +66,7 @@ class UserController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'is_admin' => $data['type'] == 'false'? false: true,
-            'profession_id' => intval($data['profession'])
+            'profession_id' => (int)$data['profession'],
         ]);
 
         return redirect()->route('users');
