@@ -12,8 +12,8 @@
                 <li class="list-group-item">
                     <p>{{ $user->name }}, ({{ $user->email }})</p>
                     <div class="mt-2">
-                        <a href="{{ route('users.show', $user) }}" class="btn btn-info">Ver detalles</a>
-                        <a href="{{ route('users.edit', $user) }}" class="btn btn-dark">Modificar</a>
+                        <a href="{{ route('users.show', $user) }}" class="btn btn-info"><i class="fas fa-eye"></i> Ver detalles</a>
+                        <a href="{{ route('users.edit', $user) }}" class="btn btn-dark"><i class="fas fa-pen"></i> Modificar</a>
                         <form action="{{ route('users.destroy', $user) }}" method="post" class="mt-2">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
