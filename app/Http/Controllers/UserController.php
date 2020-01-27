@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profession;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -32,9 +33,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function edit($id){
+    public function edit(User $user){
+        $professions = Profession::all();
+
         return view('users/edit', [
-            'id' => $id
+            'user' => $user,
+            'professions' => $professions
         ]);
     }
 
@@ -66,6 +70,33 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('users');
+    }
+
+    public function update(User $user){
+        $data = request()->validate([
+            'name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'password' => '',
+            'type' => '',
+            'profession' => ''
+        ], [
+            'name.required' => 'El campo nombre es obligatorio.',
+            'name.regex' => 'El campo nombre no es válido.',
+            'name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
+            'email.required' => 'El campo correo electrónico es obligatorio.',
+            'email.unique' => 'El campo correo electrónico ya pertenece a otro usuario.',
+            'email.email' => 'El campo correo electrónico no es válido.'
+        ]);
+
+        if($data['password'] != null){
+            $data['password'] = bcrypt($data['password']);
+        }else{
+            unset($data['password']);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('users.show', ['user' => $user]);
     }
 }
  

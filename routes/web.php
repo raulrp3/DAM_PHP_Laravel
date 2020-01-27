@@ -23,5 +23,7 @@ Route::prefix('/users')->group(function() {
 
     Route::post('/new', 'UserController@store')->name('users.create');
 
-    Route::get('/{id}/edit', 'UserController@edit')->where('id', '[0-9]+')->name('users.edit');
+    Route::get('/{user}/edit', 'UserController@edit')->name('users.edit');
+
+    Route::put('/{user}/edit', 'UserController@update')->name('users.edit');
 });
