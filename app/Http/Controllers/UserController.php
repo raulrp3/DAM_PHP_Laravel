@@ -91,11 +91,24 @@ class UserController extends Controller
 
         if($data['password'] != null){
             $data['password'] = bcrypt($data['password']);
+
+            $user->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'is_admin' => $data['type'] == 'false'? false: true,
+                'profession_id' => (int)$data['profession'],
+            ]);
         }else{
             unset($data['password']);
-        }
 
-        $user->update($data);
+            $user->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'is_admin' => $data['type'] == 'false'? false: true,
+                'profession_id' => (int)$data['profession'],
+            ]);
+        }
 
         return redirect()->route('users.show', ['user' => $user]);
     }
