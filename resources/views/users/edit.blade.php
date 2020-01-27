@@ -28,20 +28,35 @@
             </div>
             <div class="form-group">
                 <p>¿Es un usuario administrador?</p>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" id="radioNo" value="false" checked>
-                    <label class="form-check-label" for="radioNo">No.</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" id="radioYes" value="true">
-                    <label class="form-check-label" for="radioYes">Sí.</label>
-                </div>
+                @if($user->is_admin)
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="radioNo" value="false">
+                        <label class="form-check-label" for="radioNo">No.</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="radioYes" value="true" checked>
+                        <label class="form-check-label" for="radioYes">Sí.</label>
+                    </div>
+                @else
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="radioNo" value="false" checked>
+                        <label class="form-check-label" for="radioNo">No.</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="radioYes" value="true">
+                        <label class="form-check-label" for="radioYes">Sí.</label>
+                    </div>
+                @endif
             </div>
             <div class="form-group">
                 <label for="professions">Profesión:</label>
                 <select name="profession" id="professions" class="form-control">
                     @foreach($professions as $profession)
-                        <option value="{{ $profession->id }}">{{ $profession->title }}</option>
+                        @if($user->profession->id == $profession->id)
+                            <option value="{{ $profession->id }}" selected>{{ $profession->title }}</option>
+                        @else
+                            <option value="{{ $profession->id }}">{{ $profession->title }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
