@@ -28,6 +28,20 @@
                 @endif 
             </div>
             <div class="form-group">
+                <label for="inputBio">Bio:</label>
+                <textarea name="bio" id="inputBio" class="form-control">{{ old('bio') }}</textarea>
+                @if($errors->has('bio'))
+                    <div class="alert alert-danger mt-2">{{ $errors->first('bio') }}</div>
+                @endif 
+            </div>
+            <div class="form-group">
+                <label for="inputTwitter">Nombre de usuario de twitter:</label>
+                <input type="text" class="form-control" id="inputTwitter" name="twitter" value="{{ old('twitter') }}">
+                @if($errors->has('twitter'))
+                    <div class="alert alert-danger mt-2">{{ $errors->first('twitter') }}</div>
+                @endif 
+            </div>
+            <div class="form-group">
                 <p>¿Es un usuario administrador?</p>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" id="radioNo" value="false" checked>
