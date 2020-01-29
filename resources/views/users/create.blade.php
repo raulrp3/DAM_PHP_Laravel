@@ -58,10 +58,16 @@
             <div class="form-group">
                 <label for="professions">Profesión:</label>
                 <select name="profession" id="professions" class="form-control">
+                    <option value="">Selecciona una profesión.</option>
                     @foreach($professions as $profession)
-                        <option value="{{ $profession->id }}">{{ $profession->title }}</option>
+                        <option value="{{ $profession->id }}" {{ old('profession') == $profession->id ? 'selected' : '' }}>
+                            {{ $profession->title }}
+                        </option>
                     @endforeach
                 </select>
+                @if($errors->has('profession'))
+                    <div class="alert alert-danger mt-2">{{ $errors->first('profession') }}</div>
+                @endif
             </div>
             <input type="submit" class="btn btn-success mt-3" value="Crear usuario">
         </form>

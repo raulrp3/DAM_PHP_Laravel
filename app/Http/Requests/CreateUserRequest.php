@@ -29,9 +29,9 @@ class CreateUserRequest extends FormRequest
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6'],
             'type' => 'required',
-            'profession' => '',
+            'profession' => ['exists:professions,id', 'nullable', 'present'],
             'bio' => ['required', 'min:6'],
-            'twitter' => '',
+            'twitter' => ['nullable', 'present'],
         ];
     }
 
@@ -48,6 +48,9 @@ class CreateUserRequest extends FormRequest
             'type.required' => 'Debe indicar si el usuario es un usuario de tipo administrador.',
             'bio.required' => 'El cambo bio es obligatorio.',
             'bio.min' => 'El cambio bio debe tener más de 6 caracteres.',
+            'profession.exists' => 'Debes seleccionar una profesión válida.',
+            'profession.present' => 'El campo profesión debe estar presente.',
+            'twitter.present' => 'El campo nombre de usuario de twitter debe estar presente.',
         ];
     }
 

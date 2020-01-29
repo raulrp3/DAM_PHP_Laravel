@@ -28,7 +28,7 @@ class UserController extends Controller
     }
 
     public function create(){
-        $professions = Profession::all();
+        $professions = Profession::orderBy('title', 'ASC')->get();
 
         return view('users/create', [
             'professions' => $professions
