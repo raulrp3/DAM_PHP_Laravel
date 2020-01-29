@@ -69,6 +69,15 @@
                     <div class="alert alert-danger mt-2">{{ $errors->first('profession') }}</div>
                 @endif
             </div>
+            <div class="form-group mt-4">
+                <h5>Habilidades</h5>
+                @foreach($skills as $skill)
+                    <div class="form-check form-check-inline">
+                        <input name ="skills[{{ $skill->id }}]" class="form-check-input" type="checkbox" id="skill_{{ $skill->id }}" value="{{ $skill->id }}" {{ old("skills.{$skill->id}") ? 'checked' : '' }}>
+                        <label class="form-check-label" for="skill_{{ $skill->id }}">{{ $skill->name }}</label>
+                    </div>
+                @endforeach
+            </div>
             <input type="submit" class="btn btn-success mt-3" value="Crear usuario">
         </form>
         <div class="alert alert-secondary mt-5">

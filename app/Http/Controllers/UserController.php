@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profession;
 use App\Models\UserProfile;
+use App\Models\Skill;
 use Illuminate\Validation\Rule;
 use App\Http\Requests\CreateUserRequest;
 
@@ -29,9 +30,10 @@ class UserController extends Controller
 
     public function create(){
         $professions = Profession::orderBy('title', 'ASC')->get();
-
+        $skills = Skill::orderBy('name', 'ASC')->get();
         return view('users/create', [
-            'professions' => $professions
+            'professions' => $professions,
+            'skills' => $skills,
         ]);
     }
 

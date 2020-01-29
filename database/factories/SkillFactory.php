@@ -1,9 +1,10 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Models\Skill;
 
-$factory->define(App\Models\Skill::class, function (Faker $faker) {
+$factory->define(Skill::class, function (Faker $faker) {
     return [
-        //
+        'name' => $faker->unique()->sentence(3),
     ];
 });
