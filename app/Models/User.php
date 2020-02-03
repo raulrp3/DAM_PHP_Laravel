@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_admin',
+        'name', 'email', 'password', 'role',
     ];
 
     /**
@@ -31,7 +31,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'is_admin' => 'boolean',
+
     ];
 
     public function profession(){
@@ -47,7 +47,7 @@ class User extends Authenticatable
     }
 
     public function isAdmin(){
-        return $this->is_admin;
+        return $this->role == 'admin';
     }
 
     public static function createUser($data){
@@ -56,7 +56,7 @@ class User extends Authenticatable
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'is_admin' => $data['type'] == 'false'? false: true,
+                'role' => $data['role'] ?? 'user',
             ]);
     
             $user->profile()->create([

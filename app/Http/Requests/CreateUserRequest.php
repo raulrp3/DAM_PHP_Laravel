@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\User;
+use App\Models\Role;
 
 class CreateUserRequest extends FormRequest
 {
@@ -28,7 +29,7 @@ class CreateUserRequest extends FormRequest
             'name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6'],
-            'type' => 'required',
+            'type' => ['nullable', 'in:'.implode(',', Role::getlist())],
             'profession' => ['exists:professions,id', 'nullable', 'present'],
             'bio' => ['required', 'min:6'],
             'twitter' => ['nullable', 'present'],
@@ -46,7 +47,7 @@ class CreateUserRequest extends FormRequest
             'email.email' => 'El campo correo electrónico no es válido.',
             'password.required' => 'El campo contraseña es obligatorio.',
             'password.min' => 'El campo contraseña debe tener más de 6 caracteres.',
-            'type.required' => 'Debe indicar si el usuario es un usuario de tipo administrador.',
+            'role.in' => 'Debes seleccionar un rol válido',
             'bio.required' => 'El cambo bio es obligatorio.',
             'bio.min' => 'El cambio bio debe tener más de 6 caracteres.',
             'profession.exists' => 'Debes seleccionar una profesión válida.',

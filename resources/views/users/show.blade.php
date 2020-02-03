@@ -9,7 +9,7 @@
         @if($user->profession != null)
             <p>Profesión: {{ $user->profession->title }}.</p>
         @endif
-        @if($user->is_admin == 1)
+        @if($user->role == 'admin')
             <p>Tipo de usuario: Administrador.</p>
         @else
             <p>Tipo de usuario: Usuario.</p>

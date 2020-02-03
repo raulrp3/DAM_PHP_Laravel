@@ -19,14 +19,14 @@ class UserSeeder extends Seeder
             'name' => 'Raúl Ramírez',
             'email' => 'raul.ramirez@escuelaestech.es',
             'password' => bcrypt('estech'),
-            'is_admin' => true
+            'role' => 'admin'
         ]);
 
         User::create([
             'name' => 'Francisco Jesús Adán',
             'email' => 'francisco.adan@escuelaestech.es',
             'password' => bcrypt('estech'),
-            'is_admin' => false
+            'role' => 'user'
         ]);
 
         factory(User::class, 48)->create()->each(function($user){

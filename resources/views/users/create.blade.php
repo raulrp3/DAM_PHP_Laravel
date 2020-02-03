@@ -42,18 +42,13 @@
                 @endif 
             </div>
             <div class="form-group">
-                <p>¿Es un usuario administrador?</p>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" id="radioNo" value="false" checked>
-                    <label class="form-check-label" for="radioNo">No.</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" id="radioYes" value="true">
-                    <label class="form-check-label" for="radioYes">Sí.</label>
-                </div>
-                @if($errors->has('type'))
-                    <div class="alert alert-danger mt-2">{{ $errors->first('type') }}</div>
-                @endif
+                <h5>Rol</h5>
+                @foreach($roles as $role => $name)
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="role" id="role_{{ $role }}" value="{{ $role }}" {{ old('role') == $role ? 'checked' : '' }}>
+                        <label class="form-check-label" for="role_{{ $role }}">{{ $name }}</label>
+                    </div>
+                @endforeach
             </div>
             <div class="form-group">
                 <label for="professions">Profesión:</label>
