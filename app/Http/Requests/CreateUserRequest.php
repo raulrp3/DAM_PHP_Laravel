@@ -32,6 +32,7 @@ class CreateUserRequest extends FormRequest
             'profession' => ['exists:professions,id', 'nullable', 'present'],
             'bio' => ['required', 'min:6'],
             'twitter' => ['nullable', 'present'],
+            'skills' => ['array', 'exists:skills,id'],
         ];
     }
 
@@ -51,6 +52,8 @@ class CreateUserRequest extends FormRequest
             'profession.exists' => 'Debes seleccionar una profesión válida.',
             'profession.present' => 'El campo profesión debe estar presente.',
             'twitter.present' => 'El campo nombre de usuario de twitter debe estar presente.',
+            'skills.array' => 'El campo habilidades debe tener el formado de lista.',
+            'skills.exists' => 'Debes seleccionar una habilidad válida',
         ];
     }
 
