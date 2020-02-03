@@ -29,7 +29,7 @@ class CreateUserRequest extends FormRequest
             'name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6'],
-            'type' => ['nullable', 'in:'.implode(',', Role::getlist())],
+            'role' => ['nullable', 'in:'.implode(',', Role::getlist())],
             'profession' => ['exists:professions,id', 'nullable', 'present'],
             'bio' => ['required', 'min:6'],
             'twitter' => ['nullable', 'present'],
