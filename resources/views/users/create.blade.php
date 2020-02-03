@@ -49,6 +49,9 @@
                         <label class="form-check-label" for="role_{{ $role }}">{{ $name }}</label>
                     </div>
                 @endforeach
+                @if($errors->has('role'))
+                    <div class="alert alert-danger mt-2">{{ $errors->first('role') }}</div>
+                @endif
             </div>
             <div class="form-group">
                 <label for="professions">Profesión:</label>
