@@ -32,20 +32,26 @@ class UserController extends Controller
         $professions = Profession::orderBy('title', 'ASC')->get();
         $skills = Skill::orderBy('name', 'ASC')->get();
         $roles = ['admin' => 'Administrador.', 'user' => 'Usuario.'];
+        $user = new User;
 
         return view('users/create', [
             'professions' => $professions,
             'skills' => $skills,
-            'roles' => $roles
+            'roles' => $roles,
+            'user' => $user
         ]);
     }
 
     public function edit(User $user){
-        $professions = Profession::all();
+        $professions = Profession::orderBy('title', 'ASC')->get();
+        $skills = Skill::orderBy('name', 'ASC')->get();
+        $roles = ['admin' => 'Administrador.', 'user' => 'Usuario.'];
 
         return view('users/edit', [
             'user' => $user,
-            'professions' => $professions
+            'professions' => $professions,
+            'skills' => $skills,
+            'roles' => $roles
         ]);
     }
 
@@ -57,14 +63,13 @@ class UserController extends Controller
 
     public function update(User $user){
         $data = request()->validate([
-            'name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
+            'name' => ['required', 'min:2'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable', 'min:6'],
             'type' => '',
             'profession' => ''
         ], [
             'name.required' => 'El campo nombre es obligatorio.',
-            'name.regex' => 'El campo nombre no es válido.',
             'name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
             'email.required' => 'El campo correo electrónico es obligatorio.',
             'email.unique' => 'El campo correo electrónico ya pertenece a otro usuario.',
