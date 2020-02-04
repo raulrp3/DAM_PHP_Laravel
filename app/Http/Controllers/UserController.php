@@ -53,8 +53,11 @@ class UserController extends Controller
             'name' => ['required', 'min:2'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable', 'min:6'],
-            'type' => '',
-            'profession' => ''
+            'role' => '',
+            'profession' => '',
+            'bio' => '',
+            'twitter' => '',
+            'skills' => '',
         ], [
             'name.required' => 'El campo nombre es obligatorio.',
             'name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
@@ -71,8 +74,7 @@ class UserController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
-                'is_admin' => $data['type'] == 'false'? false: true,
-                'profession_id' => (int)$data['profession'],
+                'role' => $data['role'],
             ]);
         }else{
             unset($data['password']);
@@ -80,10 +82,17 @@ class UserController extends Controller
             $user->update([
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'is_admin' => $data['type'] == 'false'? false: true,
-                'profession_id' => (int)$data['profession'],
+                'role' => $data['role'],
             ]);
         }
+
+        $user->profile()->update([
+            'bio' => $data['bio'],
+            'twitter' => $data['twitter'],
+            'profession_id' => $data['profession']
+        ]);
+
+        $user->skills()->sync($data['skills'] ?? []);
 
         return redirect()->route('users.show', ['user' => $user]);
     }
