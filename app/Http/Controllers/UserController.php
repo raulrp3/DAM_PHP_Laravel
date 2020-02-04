@@ -29,29 +29,16 @@ class UserController extends Controller
     }
 
     public function create(){
-        $professions = Profession::orderBy('title', 'ASC')->get();
-        $skills = Skill::orderBy('name', 'ASC')->get();
-        $roles = ['admin' => 'Administrador.', 'user' => 'Usuario.'];
         $user = new User;
 
         return view('users/create', [
-            'professions' => $professions,
-            'skills' => $skills,
-            'roles' => $roles,
             'user' => $user
         ]);
     }
 
     public function edit(User $user){
-        $professions = Profession::orderBy('title', 'ASC')->get();
-        $skills = Skill::orderBy('name', 'ASC')->get();
-        $roles = ['admin' => 'Administrador.', 'user' => 'Usuario.'];
-
         return view('users/edit', [
             'user' => $user,
-            'professions' => $professions,
-            'skills' => $skills,
-            'roles' => $roles
         ]);
     }
 
