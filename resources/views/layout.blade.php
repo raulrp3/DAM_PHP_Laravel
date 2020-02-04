@@ -23,7 +23,7 @@
               </ul>
             </div>
           </nav>
-          <div class="content">
+          <div class="content container mt-5">
               @yield('content')
           </div>
     </div>
