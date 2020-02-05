@@ -33,7 +33,7 @@ class UpdateUserRequest extends FormRequest
             'role' => [Rule::in(Role::getList())],
             'profession' => ['nullable', 'present', Rule::exists('professions', 'id')],
             'bio' => ['required', 'min:6'],
-            'twitter' => ['nullable', 'present', 'url'],
+            'twitter' => ['nullable', 'present'],
             'skills' => ['array', Rule::exists('skills', 'id')],
         ];
     }
