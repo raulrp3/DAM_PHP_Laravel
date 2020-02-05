@@ -3,10 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\User;
+use Illuminate\Validation\Rule;
 use App\Models\Role;
+use App\Models\User;
 
-class CreateUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,26 +27,24 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:6'],
-            'role' => ['nullable', 'in:'.implode(',', Role::getlist())],
-            'profession' => ['exists:professions,id', 'nullable', 'present'],
+            'name' => ['required', 'min:2'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($this->user)],
+            'password' => ['nullable', 'min:6'],
+            'role' => [Rule::in(Role::getList())],
+            'profession' => ['nullable', 'present', Rule::exists('professions', 'id')],
             'bio' => ['required', 'min:6'],
-            'twitter' => ['nullable', 'present'],
-            'skills' => ['array', 'exists:skills,id'],
+            'twitter' => ['nullable', 'present', 'url'],
+            'skills' => ['array', Rule::exists('skills', 'id')],
         ];
     }
 
     public function messages(){
         return [
             'name.required' => 'El campo nombre es obligatorio.',
-            'name.regex' => 'El campo nombre no es válido.',
             'name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
             'email.required' => 'El campo correo electrónico es obligatorio.',
             'email.unique' => 'El campo correo electrónico ya pertenece a otro usuario.',
             'email.email' => 'El campo correo electrónico no es válido.',
-            'password.required' => 'El campo contraseña es obligatorio.',
             'password.min' => 'El campo contraseña debe tener más de 6 caracteres.',
             'role.in' => 'Debes seleccionar un rol válido.',
             'bio.required' => 'El cambo bio es obligatorio.',
@@ -58,7 +57,7 @@ class CreateUserRequest extends FormRequest
         ];
     }
 
-    public function createUser(){
-        User::createUser($this->validated());
+    public function updateUser(User $user){
+        User::updateUser($this->validated(), $user);
     }
 }

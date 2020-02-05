@@ -68,4 +68,33 @@ class User extends Authenticatable
             $user->skills()->attach($data['skills'] ?? []);
         });
     }
+
+    public static function updateUser($data, $user){
+        if($data['password'] != null){
+            $data['password'] = bcrypt($data['password']);
+
+            $user->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'role' => $data['role'],
+            ]);
+        }else{
+            unset($data['password']);
+
+            $user->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'role' => $data['role'],
+            ]);
+        }
+
+        $user->profile()->update([
+            'bio' => $data['bio'],
+            'twitter' => $data['twitter'],
+            'profession_id' => $data['profession']
+        ]);
+
+        $user->skills()->sync($data['skills'] ?? []);
+    }
 }
