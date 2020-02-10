@@ -16,7 +16,11 @@
                     <th>Correo electrónico</th>
                     <th>Rol</th>
                     <th>Fechas</th>
-                    <th>Acciones</th>
+                    <th colspan="3">
+                        <th></th>
+                        <th>Acciones</th>
+                        <th></th>
+                    </th>
                 </tr>
             </thead>
             <tbody>
