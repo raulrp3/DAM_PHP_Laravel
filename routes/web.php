@@ -27,7 +27,13 @@ Route::prefix('/users')->group(function() {
 
     Route::put('/{user}/edit', 'UserController@update')->name('users.edit');
 
-    Route::delete('/{user}', 'UserController@destroy')->name('users.destroy');
+    Route::delete('/{id}', 'UserController@destroy')->name('users.destroy');
+
+    Route::patch('/{user}/trash', 'UserController@trash')->name('users.trash');
+
+    Route::get('/trash', 'UserController@trashed')->name('users.trashed');
+
+    Route::post('/{user}/restore', 'UserController@restore')->name('users.restore');
 });
 
 Route::prefix('/professions')->group(function() {

@@ -55,10 +55,34 @@ class UserController extends Controller
         return redirect()->route('users.show', ['user' => $user]);
     }
 
-    public function destroy(User $user){
+    public function destroy($id){
+        $user = User::onlyTrashed()->where('id', $id)->firstOrFail();
+        $user->forceDelete();
+
+        return redirect()->route('users.trashed');
+    }
+
+    public function trash(User $user){
         $user->delete();
+        $user->profile()->delete();
 
         return redirect()->route('users');
+    }
+
+    public function trashed(){
+        $users = User::onlyTrashed()->get();
+
+        return view('users/index', [
+            'users' => $users,
+            'title' => 'Listado de usuario en papelera'
+        ]);
+    }
+
+    public function restore($id){
+        $user = User::onlyTrashed()->where('id', $id)->firstOrFail();
+        $user->restore();
+
+        return redirect()->route('users.trashed');
     }
 }
  
