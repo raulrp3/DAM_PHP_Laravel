@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('shared._card', 'card');
 
         View::composer('users/_fields', UserFieldsComposer::class);
+
+        Paginator::defaultView('shared.pagination');
+        Paginator::defaultSimpleView('shared.simple-pagination');
     }
 
     /**

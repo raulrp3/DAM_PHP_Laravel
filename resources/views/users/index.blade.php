@@ -43,5 +43,7 @@
                 <li class="list-group-item">No hay usuarios registrados.</li>
             @endforelse
         </ul>
+        
+        {{ $users->render() }}
     </div>
 @endsection
