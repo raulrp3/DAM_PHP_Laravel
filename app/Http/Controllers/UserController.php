@@ -70,7 +70,7 @@ class UserController extends Controller
     }
 
     public function trashed(){
-        $users = User::onlyTrashed()->get();
+        $users = User::onlyTrashed()->paginate();
 
         return view('users/index', [
             'users' => $users,

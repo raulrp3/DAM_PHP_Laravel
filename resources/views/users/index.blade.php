@@ -8,7 +8,7 @@
             <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo usuario <i class="fas fa-user-plus"></i></a>
             <a href="{{ route('users.trashed') }}" class="btn btn-danger">Papelera <i class="fas fa-trash"></i></a>
         </div>
-        <ul class="list-group mt-4 mb-4">
+        <!--<ul class="list-group mt-4 mb-4">
             @forelse($users as $user)
                 <li class="list-group-item">
                     <p>{{ $user->name }}, ({{ $user->email }})</p>
@@ -42,8 +42,24 @@
             @empty
                 <li class="list-group-item">No hay usuarios registrados.</li>
             @endforelse
-        </ul>
-        
+        </ul>-->
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Correo electrónico</th>
+                    <th>Rol</th>
+                    <th>Fechas</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($users as $user)
+                    @include('users._row', ['user' => $user])
+                @endforeach
+            </tbody>
+        </table>
         {{ $users->render() }}
     </div>
 @endsection
