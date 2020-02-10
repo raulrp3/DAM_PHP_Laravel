@@ -20,6 +20,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('users') }}"><i class="fas fa-user"></i> Usuarios</a>
                 </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{ route('professions') }}"><i class="fas fa-window-restore"></i> Profesiones</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{ route('skills') }}"><i class="far fa-address-card"></i> Habilidades</a>
+                </li>
               </ul>
             </div>
           </nav>

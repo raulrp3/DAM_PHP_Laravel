@@ -8,7 +8,7 @@ class Profession extends Model
 {
     protected $table = 'professions';
 
-    public function users(){
-        return $this->hasMany(User::class);
+    public function profiles(){
+        return $this->hasMany(UserProfile::class);
     }
 }

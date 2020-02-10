@@ -29,3 +29,15 @@ Route::prefix('/users')->group(function() {
 
     Route::delete('/{user}', 'UserController@destroy')->name('users.destroy');
 });
+
+Route::prefix('/professions')->group(function() {
+
+    Route::get('/', 'ProfessionController@index')->name('professions');
+
+    Route::delete('/{profession}', 'ProfessionController@destroy')->name('professions.destroy');
+});
+
+Route::prefix('/skills')->group(function() {
+
+    Route::get('/', 'SkillController@index')->name('skills');
+});
