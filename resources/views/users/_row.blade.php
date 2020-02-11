@@ -3,13 +3,14 @@
     <td>
         <div>
             <p><strong>{{ $user->name }}.</strong></p>
-            <p>{{ $user->profile->profession->title }}</p>
+            <p>Profesión: {{ $user->profile->profession->title }}</p>
+            <p>Empresa: {{ $user->team->name }}</p>
         </div>
     </td>
     <td>
         <div>
             <p>{{ $user->email }}</p>
-            <p>{{ $user->skills->implode('name', ',') ?: 'Sin habilidades' }}.</p>
+            <p>Habilidades: {{ $user->skills->implode('name', ',') ?: 'Sin habilidades' }}.</p>
         </div>
     </td>
     <td>{{ $user->role }}</td>
