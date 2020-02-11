@@ -28,27 +28,27 @@
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            <button type="submit" class="btn btn-danger">DEL</button>
                         </form>
                     </td>
                     <td>
                         <form action="{{ route('users.restore', $user) }}" method="post" class="mt-2">
                             {{ csrf_field() }}
 
-                            <button type="submit" class="btn btn-info"><i class="fas fa-trash-restore"></i></button>
+                            <button type="submit" class="btn btn-info">RES</button>
                         </form>
                     </td>
                 </div>
             @else
                 <div class="mt-2">
-                    <td><a href="{{ route('users.show', $user) }}" class="btn btn-info"><i class="fas fa-eye"></i></a></td>
-                    <td><a href="{{ route('users.edit', $user) }}" class="btn btn-dark"><i class="fas fa-pen"></i></a></td>
+                    <td><a href="{{ route('users.show', $user) }}" class="btn btn-info">MOS</a></td>
+                    <td><a href="{{ route('users.edit', $user) }}" class="btn btn-dark">MOD</i></a></td>
                     <td>
                         <form action="{{ route('users.trash', $user) }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('PATCH') }}
 
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-user-times"></i></button>
+                            <button type="submit" class="btn btn-danger">DES</i></button>
                         </form>
                      </td>
                 </div>

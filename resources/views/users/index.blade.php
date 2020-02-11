@@ -5,8 +5,8 @@
     <div class="container mt-5">
         <h1>{{ $title }}</h1>
         <div class="alert alert-secondary mt-3 mb-5">
-            <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo usuario <i class="fas fa-user-plus"></i></a>
-            <a href="{{ route('users.trashed') }}" class="btn btn-danger">Papelera <i class="fas fa-trash"></i></a>
+            <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo usuario</a>
+            <a href="{{ route('users.trashed') }}" class="btn btn-danger">Papelera</a>
         </div>
 
         @include('users._filters')
@@ -32,6 +32,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $users->render() }}
+        {{ $users->appends(request(['search')])->render() }}
     </div>
 @endsection
