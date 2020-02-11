@@ -4,10 +4,13 @@
 
     <div class="container mt-5">
         <h1>{{ $title }}</h1>
-        <div class="alert alert-secondary my-3">
+        <div class="alert alert-secondary mt-3 mb-5">
             <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo usuario <i class="fas fa-user-plus"></i></a>
             <a href="{{ route('users.trashed') }}" class="btn btn-danger">Papelera <i class="fas fa-trash"></i></a>
         </div>
+
+        @include('users._filters')
+
         <table class="table mt-5">
             <thead class="thead-dark">
                 <tr>
