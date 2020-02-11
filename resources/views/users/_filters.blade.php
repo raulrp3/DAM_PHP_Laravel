@@ -1,4 +1,14 @@
 <form action="{{ route('users') }}" method="get">
+    <div class="row mb-3">
+        <div class="col-12">
+            @foreach(['' => 'Todos', 'with_team' => 'Con empresa', 'without_team' => 'Sin empresa'] as $value => $text)
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="team" id="team_{{ $value ?: 'all' }}" value="{{ $value }}" {{ $value === request('team', '') ? 'checked' : '' }}>
+                    <label for="team_{{ $value ?: 'all' }}" class="form-check-label">{{ $text }}.</label>
+                </div>
+            @endforeach
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <div class="form-inline form-search">
