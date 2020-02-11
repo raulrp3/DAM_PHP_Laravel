@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role',
+        'first_name', 'last_name', 'email', 'password', 'role',
     ];
 
     /**
@@ -53,10 +53,15 @@ class User extends Authenticatable
         return $this->role == 'admin';
     }
 
+    public function getNameAttribute(){
+        return "{$this->first_name} {$this->last_name}";
+    }
+
     public static function createUser($data){
         DB::transaction(function() use($data){
             $user = User::create([
-                'name' => $data['name'],
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'role' => $data['role'] ?? 'user',
@@ -77,7 +82,8 @@ class User extends Authenticatable
             $data['password'] = bcrypt($data['password']);
 
             $user->update([
-                'name' => $data['name'],
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'role' => $data['role'],
@@ -86,7 +92,8 @@ class User extends Authenticatable
             unset($data['password']);
 
             $user->update([
-                'name' => $data['name'],
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
                 'email' => $data['email'],
                 'role' => $data['role'],
             ]);
@@ -110,7 +117,7 @@ class User extends Authenticatable
             }
         })->when(request('search'), function($query, $search){
             $query->where(function($query) use ($search){
-                $query->where('name', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%")->orWhereHas('team', function($query) use ($search){
+                $query->where('first_name', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%")->orWhereHas('team', function($query) use ($search){
                     $query->where('name', 'like', "%{$search}%");
                 });
             });

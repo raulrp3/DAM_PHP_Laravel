@@ -26,7 +26,8 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
+            'first_name' => ['required', 'regex:/^[\pL\s\-]+$/u', 'min:2'],
+            'last_name' => ['required', 'min:2'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6'],
             'role' => ['nullable', 'in:'.implode(',', Role::getlist())],
@@ -39,9 +40,11 @@ class CreateUserRequest extends FormRequest
 
     public function messages(){
         return [
-            'name.required' => 'El campo nombre es obligatorio.',
-            'name.regex' => 'El campo nombre no es válido.',
-            'name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
+            'first_name.required' => 'El campo nombre es obligatorio.',
+            'first_name.regex' => 'El campo nombre no es válido.',
+            'first_name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
+            'last_name.required' => 'El campo primer apellido es obligatorio',
+            'last_name.min' => 'El campo primer apellido debe tener más de 2 caracteres.',
             'email.required' => 'El campo correo electrónico es obligatorio.',
             'email.unique' => 'El campo correo electrónico ya pertenece a otro usuario.',
             'email.email' => 'El campo correo electrónico no es válido.',

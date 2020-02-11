@@ -27,7 +27,8 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:2'],
+            'first_name' => ['required', 'min:2'],
+            'last_name' => ['required', 'min:2'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->user)],
             'password' => ['nullable', 'min:6'],
             'role' => [Rule::in(Role::getList())],
@@ -40,8 +41,10 @@ class UpdateUserRequest extends FormRequest
 
     public function messages(){
         return [
-            'name.required' => 'El campo nombre es obligatorio.',
-            'name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
+            'first_name.required' => 'El campo nombre es obligatorio.',
+            'first_name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
+            'last_name.required' => 'El campo nombre es obligatorio.',
+            'last_name.min' => 'El campo  nombre debe tener más de 2 caracteres.',
             'email.required' => 'El campo correo electrónico es obligatorio.',
             'email.unique' => 'El campo correo electrónico ya pertenece a otro usuario.',
             'email.email' => 'El campo correo electrónico no es válido.',

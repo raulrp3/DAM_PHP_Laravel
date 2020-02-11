@@ -2,9 +2,16 @@
 
 <div class="form-group">
     <label for="inputName">Nombre:</label>
-    <input type="text" class="form-control" id="inputName" name="name" value="{{ old('name', $user->name) }}">
-    @if($errors->has('name'))
-        <div class="alert alert-danger mt-2">{{ $errors->first('name') }}</div>
+    <input type="text" class="form-control" id="inputName" name="first_name" value="{{ old('first_name', $user->first_name) }}">
+    @if($errors->has('first_name'))
+        <div class="alert alert-danger mt-2">{{ $errors->first('first_name') }}</div>
+    @endif   
+</div>
+<div class="form-group">
+    <label for="inputLastName">Primer apellido:</label>
+    <input type="text" class="form-control" id="inputLastName" name="last_name" value="{{ old('last_name', $user->last_name) }}">
+    @if($errors->has('last_name'))
+        <div class="alert alert-danger mt-2">{{ $errors->first('last_name') }}</div>
     @endif   
 </div>
 <div class="form-group">

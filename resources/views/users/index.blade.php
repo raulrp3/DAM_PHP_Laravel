@@ -32,6 +32,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $users->appends(request(['search')])->render() }}
+        {{ $users->appends([request('search')])->render() }}
     </div>
 @endsection
