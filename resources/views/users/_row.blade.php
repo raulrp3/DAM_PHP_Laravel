@@ -2,7 +2,12 @@
     <td>{{ $user->id }}</td>
     <td>
         <div>
-            <p><strong>{{ $user->name }}.</strong></p>
+            <p>
+                <strong>{{ $user->name }}</strong>
+                @if($user->role != 'user')
+                    (Administrador).
+                @endif
+            </p>
             <p>Profesión: {{ $user->profile->profession->title }}</p>
             <p>Empresa: {{ $user->team->name }}</p>
             <p>{{ $user->state }}.</p>

@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function index(){
 
-        $users = User::with('team', 'skills', 'profile', 'profile.profession')->byState()->search()->orderBy('created_at', 'DESC')->paginate();
+        $users = User::with('team', 'skills', 'profile', 'profile.profession')->byState()->byRole()->search()->orderBy('created_at', 'DESC')->paginate();
 
         return view('users/index', [
             'users' => $users,
@@ -24,6 +24,7 @@ class UserController extends Controller
             'skills' => Skill::orderBy('name')->get(),
             'states' => trans('user.filters.states'),
             'checkedSkills' => collect(request('skills')),
+            'view' => 'index',
         ]);
     }
 
@@ -80,7 +81,8 @@ class UserController extends Controller
 
         return view('users/index', [
             'users' => $users,
-            'title' => 'Listado de usuario en papelera'
+            'title' => 'Listado de usuario en papelera',
+            'view' => 'trash',
         ]);
     }
 

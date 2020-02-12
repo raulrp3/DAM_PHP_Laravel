@@ -146,4 +146,10 @@ class User extends Authenticatable
             return $query->where('active', false);
         }
     }
+
+    public function scopeByRole($query){
+        if(in_array(request('role'), ['user', 'admin'])){
+            $query->where('role', request('role'));
+        }
+    }
 }

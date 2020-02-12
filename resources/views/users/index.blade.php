@@ -5,11 +5,15 @@
     <div class="container mt-5">
         <h1>{{ $title }}</h1>
         <div class="alert alert-secondary mt-3 mb-5">
-            <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo usuario</a>
-            <a href="{{ route('users.trashed') }}" class="btn btn-danger">Papelera</a>
+            @if($view == 'index')
+                <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo usuario</a>
+                <a href="{{ route('users.trashed') }}" class="btn btn-danger">Papelera</a>
+            @elseif($view == 'trash')
+                <a href="{{ route('users') }}" class="btn btn-primary">Volver al listado de usuarios</a>
+            @endif
         </div>
 
-        @includeWhen(isset($states), 'users._filters')
+        @includeWhen($view == 'index', 'users._filters')
 
         <table class="table mt-5">
             <thead class="thead-dark">

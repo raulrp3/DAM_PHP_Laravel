@@ -4,7 +4,7 @@
         'states' => ['active' => 'Usuario activo', 'inactive' => 'Usuario inactivo'],
 
         'filters' => [
-            'roles' => ['all' => 'Rol', 'admins' => 'Administradores', 'users' => 'Usuarios'],
+            'roles' => ['all' => 'Rol', 'admin' => 'Administradores', 'user' => 'Usuarios'],
             'states' => ['all' => 'Todos', 'active' => 'Activos', 'inactive' => 'Inactivos'],
         ],
     ];
