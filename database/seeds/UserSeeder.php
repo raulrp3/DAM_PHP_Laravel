@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
         foreach(range(1, 50) as $index){
             $user = factory(User::class)->create([
                 'team_id' => rand(0, 2) ? null : $this->teams->random()->id,
+                'active' => rand(0, 3) ? true : false,
             ]);
 
             $user->skills()->attach($this->skills->random(rand(0, 2)));

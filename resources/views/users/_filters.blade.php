@@ -8,6 +8,14 @@
                 </div>
             @endforeach
         </div>
+        <div class="col-12 mt-3">
+            @foreach($states as $value => $text)
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" name="state" id="state_{{ $value ?: 'all' }}" value="{{ $value }}" {{ $value === request('state', '') ? 'checked' : '' }}>
+                    <label for="state_{{ $value ?: 'all' }}" class="form-check-label">{{ $text }}.</label>
+                </div>
+            @endforeach
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6">

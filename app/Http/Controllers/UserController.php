@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function index(){
 
-        $users = User::with('team', 'skills', 'profile', 'profile.profession')->search()->orderBy('created_at', 'DESC')->paginate();
+        $users = User::with('team', 'skills', 'profile', 'profile.profession')->byState()->search()->orderBy('created_at', 'DESC')->paginate();
 
         return view('users/index', [
             'users' => $users,

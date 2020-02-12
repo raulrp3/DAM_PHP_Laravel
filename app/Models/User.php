@@ -34,7 +34,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-
+        'active' => 'bool',
     ];
     
     public function profile(){
@@ -122,5 +122,15 @@ class User extends Authenticatable
                 });
             });
         });
+    }
+
+    public function scopeByState($query){
+        if(request('state') == 'active'){
+            return $query->where('active', true);
+        }
+
+        if(request('state') == 'inactive'){
+            return $query->where('active', false);
+        }
     }
 }
