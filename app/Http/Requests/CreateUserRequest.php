@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Role;
 
@@ -35,6 +36,7 @@ class CreateUserRequest extends FormRequest
             'bio' => ['required', 'min:6'],
             'twitter' => ['nullable', 'present'],
             'skills' => ['array', 'exists:skills,id'],
+            'state' => [Rule::in(['active', 'inactive'])],
         ];
     }
 
@@ -58,6 +60,7 @@ class CreateUserRequest extends FormRequest
             'twitter.present' => 'El campo nombre de usuario de twitter debe estar presente.',
             'skills.array' => 'El campo habilidades debe tener el formado de lista.',
             'skills.exists' => 'Debes seleccionar una habilidad válida',
+            'state.in' => 'Debes seleccionar un estado válido.',
         ];
     }
 

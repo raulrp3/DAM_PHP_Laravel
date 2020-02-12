@@ -36,6 +36,7 @@ class UpdateUserRequest extends FormRequest
             'bio' => ['required', 'min:6'],
             'twitter' => ['nullable', 'present'],
             'skills' => ['array', Rule::exists('skills', 'id')],
+            'state' => [Rule::in(['active', 'inactive'])],
         ];
     }
 
@@ -57,6 +58,7 @@ class UpdateUserRequest extends FormRequest
             'twitter.present' => 'El campo nombre de usuario de twitter debe estar presente.',
             'skills.array' => 'El campo habilidades debe tener el formado de lista.',
             'skills.exists' => 'Debes seleccionar una habilidad válida',
+            'state.in' => 'Debes seleccionar un estado válido.',
         ];
     }
 

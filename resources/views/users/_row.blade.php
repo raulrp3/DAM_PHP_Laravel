@@ -5,11 +5,7 @@
             <p><strong>{{ $user->name }}.</strong></p>
             <p>Profesión: {{ $user->profile->profession->title }}</p>
             <p>Empresa: {{ $user->team->name }}</p>
-            @if($user->active)
-                <p>Usuario activo.</p>
-            @else
-                <p>Usuario inactivo.</p>
-            @endif
+            <p>{{ $user->state }}.</p>
         </div>
     </td>
     <td>

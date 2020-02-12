@@ -43,7 +43,7 @@
     @endif 
 </div>
 <div class="form-group">
-    <h5>Rol</h5>
+    <h5>Rol:</h5>
     @foreach($roles as $role => $name)
         <div class="form-check">
             <input class="form-check-input" type="radio" name="role" id="role_{{ $role }}" value="{{ $role }}" {{ old('role', $user->role) == $role ? 'checked' : '' }}>
@@ -52,6 +52,18 @@
     @endforeach
     @if($errors->has('role'))
         <div class="alert alert-danger mt-2">{{ $errors->first('role') }}</div>
+    @endif
+</div>
+<div class="form-group">
+    <h5>Estado:</h5>
+    @foreach($states as $state => $text)
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="state" id="state_{{ $state }}" value="{{ $state }}" {{ old('state', $user->state) == $state ? 'checked' : '' }}>
+            <label class="form-check-label" for="state_{{ $state }}">{{ $text }}.</label>
+        </div>
+    @endforeach
+    @if($errors->has('state'))
+        <div class="alert alert-danger mt-2">{{ $errors->first('state') }}</div>
     @endif
 </div>
 <div class="form-group">
@@ -69,7 +81,7 @@
     @endif
 </div>
 <div class="form-group mt-4">
-    <h5>Habilidades</h5>
+    <h5>Habilidades:</h5>
     @foreach($skills as $skill)
         <div class="form-check form-check-inline">
             <input name ="skills[{{ $skill->id }}]" class="form-check-input" type="checkbox" id="skill_{{ $skill->id }}" value="{{ $skill->id }}" {{ $errors->any() ? old("skills.{$skill->id}") : $user->skills->contains($skill) ? 'checked' : '' }}>

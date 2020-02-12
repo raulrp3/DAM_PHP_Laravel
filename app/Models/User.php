@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'role',
+        'first_name', 'last_name', 'email', 'password', 'role', 'state',
     ];
 
     /**
@@ -57,6 +57,16 @@ class User extends Authenticatable
         return "{$this->first_name} {$this->last_name}";
     }
 
+    public function setStateAttribute($value){
+        $this->active = $value == 'active';
+    }
+
+    public function getStateAttribute(){
+        if($this->active !== null){
+            return $this->active ? 'active' : 'inactive';
+        }
+    }
+
     public static function createUser($data){
         DB::transaction(function() use($data){
             $user = User::create([
@@ -65,6 +75,7 @@ class User extends Authenticatable
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'role' => $data['role'] ?? 'user',
+                'state' => $data['state'],
             ]);
     
             $user->profile()->create([
@@ -87,6 +98,7 @@ class User extends Authenticatable
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'role' => $data['role'],
+                'state' => $data['state'],
             ]);
         }else{
             unset($data['password']);
@@ -96,6 +108,7 @@ class User extends Authenticatable
                 'last_name' => $data['last_name'],
                 'email' => $data['email'],
                 'role' => $data['role'],
+                'state' => $data['state'],
             ]);
         }
 

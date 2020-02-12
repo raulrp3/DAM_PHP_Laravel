@@ -37,13 +37,15 @@ class UserController extends Controller
         $user = new User;
 
         return view('users/create', [
-            'user' => $user
+            'user' => $user,
+            'states' => trans('user.states'),
         ]);
     }
 
     public function edit(User $user){
         return view('users/edit', [
             'user' => $user,
+            'states' => trans('user.states'),
         ]);
     }
 
