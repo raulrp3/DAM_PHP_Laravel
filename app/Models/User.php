@@ -117,7 +117,7 @@ class User extends Authenticatable
             }
         })->when(request('search'), function($query, $search){
             $query->where(function($query) use ($search){
-                $query->where('first_name', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%")->orWhereHas('team', function($query) use ($search){
+                $query->where(DB::raw('CONCAT(first_name, " ", last_name)'), 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%")->orWhereHas('team', function($query) use ($search){
                     $query->where('name', 'like', "%{$search}%");
                 });
             });
