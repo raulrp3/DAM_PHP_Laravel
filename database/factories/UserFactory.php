@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 use App\Models\User;
-use App\Models\Profession;
+use App\Models\UserProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +24,8 @@ $factory->define(User::class, function (Faker $faker) {
         'role' => 'user',
         'remember_token' => str_random(10),
     ];
+});
+
+$factory->afterCreating(User::class, function($user, $faker){
+    $user->profile()->save(factory(UserProfile::class)->make());
 });

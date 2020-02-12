@@ -18,6 +18,21 @@
                         <button type="submit" class="btn btn-secondary btn-sm">Buscar</button>
                     </div>
                 </div>
+                <div class="btn-group  ml-4">
+                    <select name="role" id="role" class="form-control form-control-sm">
+                        @foreach ($roles as $value => $text)
+                            <option value="{{ $value }}" {{ request('role') == $value ? 'selected' : ''}}>{{ $text }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group mt-4"> 
+                    @foreach($skills as $skill)
+                        <div class="form-check form-check-inline">
+                            <input name ="skills[]" class="form-check-input" type="checkbox" id="skill_{{ $skill->id }}" value="{{ $skill->id }}" {{ $checkedSkills->contains($skill->id) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="skill_{{ $skill->id }}">{{ $skill->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

@@ -15,11 +15,15 @@ class UserController extends Controller
 {
     public function index(){
 
-        $users = User::with('team', 'skills', 'profile')->search()->orderBy('created_at', 'DESC')->paginate();
+        $users = User::with('team', 'skills', 'profile', 'profile.profession')->search()->orderBy('created_at', 'DESC')->paginate();
 
         return view('users/index', [
             'users' => $users,
-            'title' => 'Listado de usuarios'
+            'title' => 'Listado de usuarios',
+            'roles' => trans('user.filters.roles'),
+            'skills' => Skill::orderBy('name')->get(),
+            'states' => trans('user.filters.states'),
+            'checkedSkills' => collect(request('skills')),
         ]);
     }
 

@@ -9,7 +9,7 @@
             <a href="{{ route('users.trashed') }}" class="btn btn-danger">Papelera</a>
         </div>
 
-        @include('users._filters')
+        @includeWhen(isset($states), 'users._filters')
 
         <table class="table mt-5">
             <thead class="thead-dark">
