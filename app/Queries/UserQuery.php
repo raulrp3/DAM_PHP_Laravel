@@ -7,7 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class UserQuery extends Builder{
 
-    public function search(){
+    use FiltersQueries;
+
+    protected function filterRules(): array{
+        return [
+            'search' => 'filled',
+            'status' => 'in:active,inactive',
+            'role' => 'in:admin,user',
+        ];
+    }
+
+    public function filterBySearch(){
         $this->when(request('team'), function($query, $team){
             if($team === 'with_team'){
                 $query->has('team');
@@ -25,23 +35,7 @@ class UserQuery extends Builder{
         return $this;
     }
 
-    public function byState(){
-        if(request('state') == 'active'){
-            return $this->where('active', true);
-        }
-
-        if(request('state') == 'inactive'){
-            return $this->where('active', false);
-        }
-
-        return $this;
-    }
-
-    public function byRole(){
-        if(in_array(request('role'), ['user', 'admin'])){
-            $this->where('role', request('role'));
-        }
-
-        return $this;
+    public function filterByState($state){
+        return $this->where('active', $state == 'active');
     }
 }

@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Profession;
-use App\Models\UserProfile;
 use App\Models\Skill;
-use Illuminate\Validation\Rule;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-        $users = User::with('team', 'skills', 'profile', 'profile.profession')->byState()->byRole()->search()->orderBy('created_at', 'DESC')->paginate();
+        $users = User::query()
+        ->with('team', 'skills', 'profile', 'profile.profession')
+        ->filterBy($request->only(['state', 'role', 'search']))
+        ->orderBy('created_at', 'DESC')
+        ->paginate();
 
         return view('users/index', [
             'users' => $users,
