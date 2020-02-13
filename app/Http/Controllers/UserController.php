@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\UserFilter;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Skill;
@@ -10,13 +11,15 @@ use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request, UserFilter $filters){
 
         $users = User::query()
         ->with('team', 'skills', 'profile', 'profile.profession')
-        ->filterBy($request->only(['state', 'role', 'search']))
+        ->filterBy($filters, $request->only(['state', 'role', 'search']))
         ->orderBy('created_at', 'DESC')
         ->paginate();
+
+        $users->appends($filters->valid());
 
         return view('users/index', [
             'users' => $users,

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Queries\QueryFilter;
 use App\Queries\UserQuery;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -123,5 +124,9 @@ class User extends Authenticatable
         ]);
 
         $user->skills()->sync($data['skills'] ?? []);
+    }
+
+    public function scopeFilterBy($query, QueryFilter $filters, array $data){
+        return $filters->applyTo($query, $data);
     }
 }
