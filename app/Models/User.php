@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Queries\UserQuery;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -36,6 +36,10 @@ class User extends Authenticatable
     protected $casts = [
         'active' => 'bool',
     ];
+
+    public function newEloquentBuilder($query){
+        return new UserQuery($query);
+    } 
     
     public function profile(){
         return $this->hasOne(UserProfile::class)->withDefault();
@@ -119,37 +123,5 @@ class User extends Authenticatable
         ]);
 
         $user->skills()->sync($data['skills'] ?? []);
-    }
-
-    public function scopeSearch($query){
-        $query->when(request('team'), function($query, $team){
-            if($team === 'with_team'){
-                $query->has('team');
-            }elseif($team === 'without_team'){
-                $query->doesntHave('team');
-            }
-        })->when(request('search'), function($query, $search){
-            $query->where(function($query) use ($search){
-                $query->where(DB::raw('CONCAT(first_name, " ", last_name)'), 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%")->orWhereHas('team', function($query) use ($search){
-                    $query->where('name', 'like', "%{$search}%");
-                });
-            });
-        });
-    }
-
-    public function scopeByState($query){
-        if(request('state') == 'active'){
-            return $query->where('active', true);
-        }
-
-        if(request('state') == 'inactive'){
-            return $query->where('active', false);
-        }
-    }
-
-    public function scopeByRole($query){
-        if(in_array(request('role'), ['user', 'admin'])){
-            $query->where('role', request('role'));
-        }
     }
 }
