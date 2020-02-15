@@ -43,5 +43,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6 text-right">
+            <div class="form-inline form-dates">
+                <div class="input-group mx-2">
+                    <input type="text" class="form-control form-control-sm" name="from" id="from" placeholder="Desde" value="{{ request('from') }}">
+                </div>
+                <div class="input-group mx-2">
+                    <input type="text" class="form-control form-control-sm" name="to" id="to" placeholder="Hasta" value="{{ request('to') }}">
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Filtrar</button>
+            </div>
+        </div>
     </div>
 </form>

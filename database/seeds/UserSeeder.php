@@ -31,8 +31,7 @@ class UserSeeder extends Seeder
 
             $user->skills()->attach($this->skills->random(rand(0, 2)));
 
-            factory(UserProfile::class)->create([
-                'user_id' => $user->id,
+            $user->profile->update([
                 'profession_id' => rand(0, 2) ? $this->professions->random()->id : null,
             ]);
         }
