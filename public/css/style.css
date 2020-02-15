@@ -1,0 +1,33 @@
+.link-sortable {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding-right: 16px;
+    opacity: 0.8;
+  }
+  
+  .link-sortable .icon-sort {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    -webkit-transform: translateY(1px);
+            transform: translateY(1px);
+    background-image: url(../images/sortable.png);
+    background-repeat: no-repeat;
+    background-position: 100% 50%;
+    background-size: 12px 12px;
+  }
+  
+  .link-sortable:hover {
+    text-decoration: underline;
+    color: #fff;
+    opacity: 1;
+  }
+  
+  .link-sortable.link-sorted-up .icon-sort {
+    background-image: url(../images/sorted-up.png);
+  }
+  
+  .link-sortable.link-sorted-down .icon-sort {
+    background-image: url(../images/sorted-down.png);
+  }

@@ -19,10 +19,10 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>Correo electrónico</th>
+                    <th><a href="#" class="{{ $sortable->classes('name') }}">Nombre <i class="icon-sort"></i></a></th>
+                    <th><a href="#" class="{{ $sortable->classes('email') }}">Correo electrónico <i class="icon-sort"></i></a></th>
                     <th>Rol</th>
-                    <th>Fechas</th>
+                    <th><a href="#" class="{{ $sortable->classes('creatd_at') }}">Fechas <i class="icon-sort"></i></a></th>
                     <th colspan="3">
                         <th></th>
                         <th>Acciones</th>
