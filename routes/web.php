@@ -31,7 +31,7 @@ Route::prefix('/users')->group(function() {
 
     Route::patch('/{user}/trash', 'UserController@trash')->name('users.trash');
 
-    Route::get('/trash', 'UserController@trashed')->name('users.trashed');
+    Route::get('/trash', 'UserController@index')->name('users.trashed');
 
     Route::post('/{user}/restore', 'UserController@restore')->name('users.restore');
 });
