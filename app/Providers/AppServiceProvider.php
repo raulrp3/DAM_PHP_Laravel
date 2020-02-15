@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use App\Http\ViewComposers\UserFieldsComposer;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
 
         Paginator::defaultView('shared.pagination');
         Paginator::defaultSimpleView('shared.simple-pagination');
+
+        Builder::macro('whereQuery', function($subquery, $operator, $value = null){
+            $this->addBinding($subquery->getBindings());
+            $this->where(DB::raw("({$subquery->toSql()})"), $operator, $value);
+        });
     }
 
     /**
