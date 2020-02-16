@@ -5,8 +5,14 @@ namespace App\Filters;
 use App\Queries\QueryFilter;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UserFilter extends QueryFilter{
+    protected $aliases = [
+        'date' => 'created_at',
+        'name' => 'first_name',
+    ];
+
     public function rules(): array{
         return [
             'search' => 'filled',
@@ -15,8 +21,7 @@ class UserFilter extends QueryFilter{
             'skills' => 'array|exists:skills,id',
             'from' => 'date_format:d/m/Y',
             'to' => 'date_format:d/m/Y',
-            'order' => 'in:first_name,email,created_at',
-            'direction' => 'in:asc,desc',
+            'order' => 'in:name,email,date,name-desc,email-desc,date-desc',
         ];
     }
 
@@ -64,10 +69,14 @@ class UserFilter extends QueryFilter{
     }
 
     public function filterByOrder($query, $value){
-        $query->orderBy($value, $this->valid['direction'] ?? 'asc');
+        if(Str::endsWith($value, '-desc')){
+            $query->orderByDesc($this->getColumnName(Str::substr($value, 0, -5)));
+        }else{
+            $query->orderBy($this->getColumnName($value));
+        }
     }
 
-    public function filterByDirection($query, $value){
-
+    public function getColumnName($alias){
+        return $this->aliases[$alias] ?? $alias;
     }
 }

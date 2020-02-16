@@ -17,7 +17,7 @@ class UserController extends Controller
         $users = User::query()
         ->with('team', 'skills', 'profile', 'profile.profession')
         ->onlyTrashedIf($request->routeIs('users.trashed'))
-        ->filterBy($filters, $request->only(['state', 'role', 'search', 'skills', 'from', 'to', 'order', 'direction']))
+        ->filterBy($filters, $request->only(['state', 'role', 'search', 'skills', 'from', 'to', 'order']))
         ->orderBy('created_at', 'desc')
         ->paginate();
 
