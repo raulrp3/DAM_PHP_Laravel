@@ -35,6 +35,14 @@ class AppServiceProvider extends ServiceProvider
             $this->addBinding($subquery->getBindings());
             $this->where(DB::raw("({$subquery->toSql()})"), $operator, $value);
         });
+
+        Builder::macro('onlyTrashedIf', function($value){
+            if($value){
+                $this->onlyTrashed();
+            }
+
+            return $this;
+        });
     }
 
     /**
