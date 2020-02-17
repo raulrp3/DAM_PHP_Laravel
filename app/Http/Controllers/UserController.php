@@ -9,6 +9,7 @@ use App\Models\Skill;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Sortable;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -81,6 +82,9 @@ class UserController extends Controller
     public function trash(User $user){
         $user->delete();
         $user->profile()->delete();
+        DB::table('user_skill')
+            ->where('user_id', $user->id)
+            ->update(['deleted_at' => now()]);
 
         return redirect()->route('users');
     }
